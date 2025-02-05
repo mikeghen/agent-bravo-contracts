@@ -12,26 +12,23 @@ contract DummyVotes is IVotes {
     function getVotes(address) external pure override returns (uint256) {
         return 0;
     }
+
     function getPastVotes(address, uint256) external pure override returns (uint256) {
         return 0;
     }
+
     function getPastTotalSupply(uint256) external pure override returns (uint256) {
         return 0;
     }
+
     function delegates(address) external pure override returns (address) {
         return address(0);
     }
+
     function delegate(address) external override {
         // dummy implementation
     }
-    function delegateBySig(
-        address,
-        uint256,
-        uint256,
-        uint8,
-        bytes32,
-        bytes32
-    ) external override {
+    function delegateBySig(address, uint256, uint256, uint8, bytes32, bytes32) external override {
         // dummy implementation
     }
 }
@@ -41,53 +38,56 @@ contract DummyCompoundTimelock is ICompoundTimelock {
     function delay() external pure override returns (uint256) {
         return 0;
     }
-    function queueTransaction(
-        address,
-        uint256,
-        string calldata,
-        bytes calldata,
-        uint256
-    ) external pure override returns (bytes32) {
+
+    function queueTransaction(address, uint256, string calldata, bytes calldata, uint256)
+        external
+        pure
+        override
+        returns (bytes32)
+    {
         return keccak256(bytes("dummy"));
     }
-    function executeTransaction(
-        address,
-        uint256,
-        string calldata,
-        bytes calldata,
-        uint256
-    ) external payable override returns (bytes memory) {
+
+    function executeTransaction(address, uint256, string calldata, bytes calldata, uint256)
+        external
+        payable
+        override
+        returns (bytes memory)
+    {
         return "";
     }
-    function cancelTransaction(
-        address,
-        uint256,
-        string calldata,
-        bytes calldata,
-        uint256
-    ) external pure override {
+
+    function cancelTransaction(address, uint256, string calldata, bytes calldata, uint256) external pure override {
         // nothing to do here
     }
     receive() external payable override {}
+
     function GRACE_PERIOD() external pure override returns (uint256) {
         return 0;
     }
+
     function MINIMUM_DELAY() external pure override returns (uint256) {
         return 0;
     }
+
     function MAXIMUM_DELAY() external pure override returns (uint256) {
         return 0;
     }
+
     function acceptAdmin() external override {}
+
     function admin() external pure override returns (address) {
         return address(0);
     }
+
     function pendingAdmin() external pure override returns (address) {
         return address(0);
     }
+
     function queuedTransactions(bytes32) external pure override returns (bool) {
         return false;
     }
+
     function setDelay(uint256) external override {}
     function setPendingAdmin(address) external override {}
 }
@@ -109,8 +109,7 @@ contract AgentBravoGovernorTest is Test {
 
         // Deploy the UUPS proxy for AgentBravoGovernor.
         address proxy = Upgrades.deployUUPSProxy(
-            "AgentBravoGovernor.sol",
-            abi.encodeCall(AgentBravoGovernor.initialize, (dummyVotes, dummyTimelock, admin))
+            "AgentBravoGovernor.sol", abi.encodeCall(AgentBravoGovernor.initialize, (dummyVotes, dummyTimelock, admin))
         );
 
         // Cast the proxy address to a payable address to remove the explicit conversion error.
@@ -121,4 +120,4 @@ contract AgentBravoGovernorTest is Test {
         // The governor was initialized with the name "AgentBravoGovernor".
         assertEq(instance.name(), "AgentBravoGovernor");
     }
-} 
+}
