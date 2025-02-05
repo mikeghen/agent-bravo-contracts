@@ -30,3 +30,11 @@ This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timel
 - **Timelock Integration:** Ensures that approved proposals are queued and executed through the timelock for enhanced security.
 - **Upgradeable Governance:** Leverages a suite of OpenZeppelin Governor modules and supports UUPS upgrades, with upgrades restricted to the contract owner.
 
+## Deployment Addresses
+
+### Base Sepolia
+| Contract | Address |
+| --- | --- |
+| Agent Bravo Token | [0x2b63aD21f2EDDB9E09938aD22Da7c3fD77635951](https://sepolia.basescan.org/address/0x2b63aD21f2EDDB9E09938aD22Da7c3fD77635951) |
+| Agent Bravo Timelock | [0xEC0818937dE5db4cdd698ecCf9881deDd239B38E](https://sepolia.basescan.org/address/0xEC0818937dE5db4cdd698ecCf9881deDd239B38E) |
+| Agent Bravo Governor | [0x821bbb2637a830A8470c62392deeB8C1a2d37835](https://sepolia.basescan.org/address/0x821bbb2637a830A8470c62392deeB8C1a2d37835) |
