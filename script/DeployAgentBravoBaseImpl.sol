@@ -63,6 +63,8 @@ abstract contract DeployAgentBravoBaseImpl is Script {
      */
     function run() public virtual returns (AgentBravoGovernor) {
         vm.startBroadcast(deployerPrivateKey);
+        console.log("Deploying AgentBravo contracts...");
+        console.log("Deployer address:", vm.addr(deployerPrivateKey));
 
         // --- Deploy AgentBravo token with UUPS proxy ---
         TokenConfig memory tokenConfig = getTokenConfig();

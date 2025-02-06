@@ -32,9 +32,9 @@ This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timel
 
 ## Deployment Addresses
 
-### Base Sepolia
+### Sepolia Ethereum
 | Contract | Address |
 | --- | --- |
-| Agent Bravo Token | [0x2b63aD21f2EDDB9E09938aD22Da7c3fD77635951](https://sepolia.basescan.org/address/0x2b63aD21f2EDDB9E09938aD22Da7c3fD77635951) |
-| Agent Bravo Timelock | [0xEC0818937dE5db4cdd698ecCf9881deDd239B38E](https://sepolia.basescan.org/address/0xEC0818937dE5db4cdd698ecCf9881deDd239B38E) |
-| Agent Bravo Governor | [0x821bbb2637a830A8470c62392deeB8C1a2d37835](https://sepolia.basescan.org/address/0x821bbb2637a830A8470c62392deeB8C1a2d37835) |
+| `AgentBravoToken` | [0x0Bb81307daEBB2Ca0A19a44c65717A3728324745](https://sepolia.basescan.org/address/0x0Bb81307daEBB2Ca0A19a44c65717A3728324745) |
+| `AgentBravoTimelock` | [0x9B7282678FEaBA6cBCE7425B1BdE4f4F29521B77](https://sepolia.basescan.org/address/0x9B7282678FEaBA6cBCE7425B1BdE4f4F29521B77) |
+| `AgentBravoGovernor` | [0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd](https://sepolia.basescan.org/address/0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd) |
