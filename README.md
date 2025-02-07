@@ -40,8 +40,17 @@ This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timel
 ## Deployment Addresses
 
 ### Sepolia Ethereum
+
+#### Agent Bravo Delegate Factory
 | Contract | Address |
 | --- | --- |
-| `AgentBravoToken` | [0x0Bb81307daEBB2Ca0A19a44c65717A3728324745](https://sepolia.basescan.org/address/0x0Bb81307daEBB2Ca0A19a44c65717A3728324745) |
-| `AgentBravoTimelock` | [0x9B7282678FEaBA6cBCE7425B1BdE4f4F29521B77](https://sepolia.basescan.org/address/0x9B7282678FEaBA6cBCE7425B1BdE4f4F29521B77) |
-| `AgentBravoGovernor` | [0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd](https://sepolia.basescan.org/address/0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd) |
+| `AgentBravoDelegateFactory` | [0x7c41063Bda9D7B2C67e655179205f074f27E11c1](https://sepolia.etherscan.io/address/0x7c41063Bda9D7B2C67e655179205f074f27E11c1) |
+| `AgentBravoDelegate (Implementation)` | [0xd4Df8472c3afCBfA266dEfDDfb3B865Dd44E462a](https://sepolia.etherscan.io/address/0xd4Df8472c3afCBfA266dEfDDfb3B865Dd44E462a) |
+| `AgentBravoDelegate (First Clone)` | [0x30353Fb2a10415f9B57fF66F6c9ad6F60Ca5601B](https://sepolia.etherscan.io/address/0x30353Fb2a10415f9B57fF66F6c9ad6F60Ca5601B) |
+
+#### Agent Bravo Governance System
+| Contract | Address |
+| --- | --- |
+| `AgentBravoToken` | [0x0Bb81307daEBB2Ca0A19a44c65717A3728324745](https://sepolia.etherscan.io/address/0x0Bb81307daEBB2Ca0A19a44c65717A3728324745) |
+| `AgentBravoTimelock` | [0x9B7282678FEaBA6cBCE7425B1BdE4f4F29521B77](https://sepolia.etherscan.io/address/0x9B7282678FEaBA6cBCE7425B1BdE4f4F29521B77) |
+| `AgentBravoGovernor` | [0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd](https://sepolia.etherscan.io/address/0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd) |
