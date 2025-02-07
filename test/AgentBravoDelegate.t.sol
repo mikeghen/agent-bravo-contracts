@@ -4,8 +4,6 @@ pragma solidity ^0.8.22;
 import "forge-std/Test.sol";
 import {AgentBravoDelegate, IGovernor} from "src/AgentBravoDelegate.sol";
 
-/// @dev Define the custom error used by OpenZeppelin's Ownable.
-error OwnableUnauthorizedAccount(address account);
 
 /// @dev DummyGovernor implements AgentBravoDelegate.IGovernor so that we can simulate governance interactions.
 contract DummyGovernor is IGovernor {
@@ -48,7 +46,9 @@ contract AgentBravoDelegateTest is Test {
         owner = address(this); // Test contract is the owner.
         nonOwner = address(0xbeef); // Arbitrary non-owner address.
         dummyGovernor = new DummyGovernor();
-        delegate = new AgentBravoDelegate(address(dummyGovernor));
+        delegate = new AgentBravoDelegate();
+        // Call initialize since the new version is initializable.
+        delegate.initialize(address(dummyGovernor), owner);
     }
 
     function testInitialGovernorIsSet() public view {
@@ -135,12 +135,12 @@ contract AgentBravoDelegateTest is Test {
 
         // Attempt to publish opinion and vote from a non-owner should revert.
         vm.prank(nonOwner);
-        vm.expectRevert(abi.encodeWithSelector(OwnableUnauthorizedAccount.selector, nonOwner));
+        vm.expectRevert("Ownable: caller is not the owner");
         delegate.publishOpinionAndVote(proposalId, support, opinionText, reasoningText);
 
         // Attempt to call vote from non-owner should revert.
         vm.prank(nonOwner);
-        vm.expectRevert(abi.encodeWithSelector(OwnableUnauthorizedAccount.selector, nonOwner));
+        vm.expectRevert("Ownable: caller is not the owner");
         delegate.vote(proposalId, support);
 
         // Attempt to call propose from non-owner should revert.
@@ -151,7 +151,7 @@ contract AgentBravoDelegateTest is Test {
         bytes[] memory calldatas = new bytes[](1);
         calldatas[0] = hex"";
         vm.prank(nonOwner);
-        vm.expectRevert(abi.encodeWithSelector(OwnableUnauthorizedAccount.selector, nonOwner));
+        vm.expectRevert("Ownable: caller is not the owner");
         delegate.propose(targets, values, calldatas, "Non-owner proposal");
     }
 
@@ -187,7 +187,7 @@ contract AgentBravoDelegateTest is Test {
 
         // Attempt to update voting policy from a non-owner address.
         vm.prank(nonOwner);
-        vm.expectRevert(abi.encodeWithSelector(OwnableUnauthorizedAccount.selector, nonOwner));
+        vm.expectRevert("Ownable: caller is not the owner");
         delegate.updateVotingPolicy(backstory, voteNoConditions, voteYesConditions, voteAbstainConditions);
     }
 } 

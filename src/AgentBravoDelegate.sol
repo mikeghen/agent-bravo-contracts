@@ -32,7 +32,13 @@ interface IGovernor {
  *
  * The owner's address controls which account can execute vote actions.
  */
-contract AgentBravoDelegate is Ownable {
+contract AgentBravoDelegate {
+    /// Used to ensure the contract is only initialized once.
+    bool private _initialized;
+
+    /// @notice The owner of the contract.
+    address public owner;
+
     /// @notice The governor contract against which votes will be cast.
     /// i.e. the governance project that the AgentBravo will participate in.
     IGovernor public governor;
@@ -57,6 +63,12 @@ contract AgentBravoDelegate is Ownable {
     /// @notice Stores the Agent's voting policy information.
     VotingPolicy public votingPolicy;
 
+    /// @notice Mapping from a proposal id to its associated opinion.
+    mapping(uint256 => Opinion) public opinions;
+
+    /// @notice Emitted when the owner of the contract is transferred.
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
     /// @notice Emitted when an opinion is published and a vote is cast.
     event OpinionPublished(
         uint256 indexed opinionIndex,  // The index of the stored opinion (i.e. proposalId)
@@ -72,16 +84,47 @@ contract AgentBravoDelegate is Ownable {
         string voteAbstainConditions
     );
 
-    /// @notice Mapping from a proposal id to its associated opinion.
-    mapping(uint256 => Opinion) public opinions;
+    /// @notice Modifier to restrict access to only the contract owner.
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Ownable: caller is not the owner");
+        _;
+    }
 
     /**
-     * @notice Constructor to set the AgentBravoGovernor address.
+     * @notice Initializes the contract setting the governor and owner addresses.
      * @param _governor The address of the deployed AgentBravoGovernor.
+     * @param newOwner The address to be set as the owner.
+     *
+     * Requirements:
+     *
+     * - Can only be called once.
      */
-    constructor(address _governor) Ownable(msg.sender) {
+    function initialize(address _governor, address newOwner) external {
+        require(!_initialized, "Already initialized");
         require(_governor != address(0), "Invalid governor address");
+        require(newOwner != address(0), "Invalid owner address");
+
         governor = IGovernor(_governor);
+        owner = newOwner;
+        _initialized = true;
+    }
+
+    /**
+     * @notice Transfers ownership of the contract to a new account.
+     * @param newOwner The address to transfer ownership to.
+     *
+     * Requirements:
+     *
+     * - Only the current owner can call this function.
+     * - New owner cannot be the zero address.
+     */
+    function transferOwnership(address newOwner) external {
+        require(msg.sender == owner, "Ownable: caller is not the owner");
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        address oldOwner = owner;
+        owner = newOwner;
+
+        emit OwnershipTransferred(oldOwner, newOwner);
     }
     
     /**

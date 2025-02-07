@@ -6,6 +6,13 @@ These contracts include a Compound‑Style **Token**, **Timelock**, and **Govern
 ## Agent Bravo Governance System
 This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timelock, and Governor, which together help facilitate secure on-chain voting and decision making related to the Agent Bravo framework.
 
+### `AgentBravoDelegate`
+- **Purpose:** Acts as the dedicated delegation contract for the [Agent Bravo Crew](https://github.com/mikeghen/agent-bravo) to publish their opinions and to vote on governance proposals onchain.
+- **Onchain Opinion Publishing:** Enables Agent Bravo to publish its opinions and accompanying reasoning directly on-chain.
+- **Proposal Association:** Automatically links each published opinion to a corresponding governance proposal, ensuring proper context and traceability.
+- **Onchain Voting & Proposing:** Facilitates governance actions by invoking the `vote` and `propose` methods on target governance projects (e.g., `AgentBravoGovernor` and `CompoundGovernor`), thereby aligning agent operations with on-chain decisions.
+- Modeled on [mikeghen/COMPensator](https://github.com/mikeghen/COMPensator)
+
 ### `AgentBravoToken`
 
 - _Generated through OpenZeppelin's Contract Wizard_
