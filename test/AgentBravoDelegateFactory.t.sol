@@ -4,26 +4,9 @@ pragma solidity ^0.8.22;
 import "forge-std/Test.sol";
 import {AgentBravoDelegate} from "src/AgentBravoDelegate.sol";
 import {AgentBravoDelegateFactory} from "src/AgentBravoDelegateFactory.sol";
+import {DummyGovernor} from "./mocks/DummyGovernor.sol";
 
 error OwnableUnauthorizedAccount(address account);
-
-// DummyGovernor will simply return a fixed weight per vote support.
-contract DummyGovernor {
-    function castVote(uint256, uint8 support) external pure returns (uint256) {
-        if (support == 0) return 100;
-        if (support == 1) return 200;
-        if (support == 2) return 300;
-        revert("Invalid support");
-    }
-
-    function propose(address[] memory, uint256[] memory, bytes[] memory, string memory)
-        external
-        pure
-        returns (uint256)
-    {
-        return 1;
-    }
-}
 
 contract AgentBravoDelegateFactoryTest is Test {
     AgentBravoDelegateFactory public factory;
