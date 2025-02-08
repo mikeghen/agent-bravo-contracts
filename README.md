@@ -3,21 +3,21 @@
 
 These contracts include a Compound‑Style **Token**, **Timelock**, and **Governor**, which together help facilitate secure on-chain voting and decision making related to the Agent Bravo framework.
 
-## Agent Bravo Governance System
-This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timelock, and Governor, which together help facilitate secure on-chain voting and decision making related to the Agent Bravo framework.
+## Agent Bravo Governance System 
+This is the Agent Bravo Governance System. It is a Compound‑Style [`AgentBravoToken`](src/AgentBravoToken.sol), [`AgentBravoTimelock`](src/AgentBravoTimelock.sol), and [`AgentBravoGovernor`](src/AgentBravoGovernor.sol), which together help facilitate secure on-chain voting and decision making related to the Agent Bravo framework. AI Delegate Agents are created by the [`AgentBravoDelegateFactory`](src/AgentBravoDelegateFactory.sol). After creating an [`AgentBravoDelegate`](src/AgentBravoDelegate.sol) contract, the owner runs the [mikeghen/agent-bravo](https://github.com/mikeghen/agent-bravo) application to start the delegate agent.
 
-### `AgentBravoDelegate`
+### [`AgentBravoDelegate`](src/AgentBravoDelegate.sol)
 - **Purpose:** Acts as the dedicated delegation contract for the [Agent Bravo Crew](https://github.com/mikeghen/agent-bravo) to publish their opinions and to vote on governance proposals onchain.
 - **Onchain Opinion Publishing:** Enables Agent Bravo to publish its opinions and accompanying reasoning directly on-chain.
 - **Proposal Association:** Automatically links each published opinion to a corresponding governance proposal, ensuring proper context and traceability.
 - **Onchain Voting & Proposing:** Facilitates governance actions by invoking the `vote` and `propose` methods on target governance projects (e.g., `AgentBravoGovernor` and `CompoundGovernor`), thereby aligning agent operations with on-chain decisions.
 - Modeled on [mikeghen/COMPensator](https://github.com/mikeghen/COMPensator)
 
-### `AgentBravoDelegateFactory`
+### [`AgentBravoDelegateFactory`](src/AgentBravoDelegateFactory.sol)
 - **Purpose:** Acts as the factory contract for the `AgentBravoDelegate` contract.
 - **Delegate Creation:** Enables the creation of `AgentBravoDelegate` instances for the [Agent Bravo Crew](https://github.com/mikeghen/agent-bravo).
 
-### `AgentBravoToken`
+### [`AgentBravoToken`](src/AgentBravoToken.sol)
 
 - _Generated through OpenZeppelin's Contract Wizard_
 - **Upgradeable:** Built on OpenZeppelin's upgradable contracts using the UUPS proxy pattern.
@@ -26,7 +26,7 @@ This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timel
 - **Voting & Delegation:** Integrated with ERC20Votes, enabling vote delegation and on-chain governance participation.
 - **Gasless Approvals:** Implements ERC20Permit for EIP‑2612 compliant, signature-based approvals.
 
-### `AgentBravoTimelock`
+### [`AgentBravoTimelock`](src/AgentBravoTimelock.sol)
 
 - _Unaudited, AI-generated implementation of the Compound Timelock contract (ICompoundTimelock)_
 - **Compound‑style timelock mechanism:** Provides a secure delay for executing governance transactions.
@@ -34,7 +34,7 @@ This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timel
 - **Enforced Delay with Grace Period:** Ensures that transactions are executed only after the minimum delay has elapsed and before the grace period expires.
 - **Admin Controls:** Provides administrative functionality for setting delays and handling pending admin transfers.
 
-### `AgentBravoGovernor`
+### [`AgentBravoGovernor`](src/AgentBravoGovernor.sol)
 - _Generated through OpenZeppelin's Contract Wizard_
 - **Proposal Lifecycle Management:** Supports proposal creation, vote counting, queuing, and execution.
 - **Configurable Governance Parameters:** Customizable settings including a voting delay (1 day), voting period (1 week), proposal threshold (10,000 tokens), and a quorum of 4% of the token supply.
