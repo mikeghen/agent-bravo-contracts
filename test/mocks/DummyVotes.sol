@@ -29,4 +29,4 @@ contract DummyVotes is IVotes {
     function delegateBySig(address, uint256, uint256, uint8, bytes32, bytes32) external override {
         // dummy implementation
     }
-} 
+}

@@ -21,13 +21,12 @@ contract DummyGovernor is IGovernor {
     }
 
     /// @notice For testing propose, we increment a counter and return it as the proposalId.
-    function propose(
-        address[] memory,
-        uint256[] memory,
-        bytes[] memory,
-        string memory
-    ) external override returns (uint256) {
+    function propose(address[] memory, uint256[] memory, bytes[] memory, string memory)
+        external
+        override
+        returns (uint256)
+    {
         proposalCounter++;
         return proposalCounter;
     }
-} 
+}

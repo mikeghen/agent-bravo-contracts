@@ -9,33 +9,25 @@ contract DummyCompoundTimelock is ICompoundTimelock {
         return 0;
     }
 
-    function queueTransaction(
-        address,
-        uint256,
-        string calldata,
-        bytes calldata,
-        uint256
-    ) external pure override returns (bytes32) {
+    function queueTransaction(address, uint256, string calldata, bytes calldata, uint256)
+        external
+        pure
+        override
+        returns (bytes32)
+    {
         return keccak256(bytes("dummy"));
     }
 
-    function executeTransaction(
-        address,
-        uint256,
-        string calldata,
-        bytes calldata,
-        uint256
-    ) external payable override returns (bytes memory) {
+    function executeTransaction(address, uint256, string calldata, bytes calldata, uint256)
+        external
+        payable
+        override
+        returns (bytes memory)
+    {
         return "";
     }
 
-    function cancelTransaction(
-        address,
-        uint256,
-        string calldata,
-        bytes calldata,
-        uint256
-    ) external pure override {
+    function cancelTransaction(address, uint256, string calldata, bytes calldata, uint256) external pure override {
         // nothing to do here
     }
 
@@ -70,4 +62,4 @@ contract DummyCompoundTimelock is ICompoundTimelock {
     function setDelay(uint256) external override {}
 
     function setPendingAdmin(address) external override {}
-} 
+}
