@@ -34,6 +34,9 @@ contract AgentBravoGovernor is
     OwnableUpgradeable,
     UUPSUpgradeable
 {
+    // Mapping from description hash to the stored proposal description.
+    mapping(bytes32 => string) private _proposalDescriptions;
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -41,7 +44,7 @@ contract AgentBravoGovernor is
 
     function initialize(IVotes _token, ICompoundTimelock _timelock, address initialOwner) public initializer {
         __Governor_init("AgentBravoGovernor");
-        __GovernorSettings_init(1 days, 1 weeks, 10000e18);
+        __GovernorSettings_init(10 minutes, 1 hours, 10000e18);
         __GovernorCountingSimple_init();
         __GovernorStorage_init();
         __GovernorVotes_init(_token);
@@ -106,6 +109,8 @@ contract AgentBravoGovernor is
         string memory description,
         address proposer
     ) internal override(GovernorUpgradeable, GovernorStorageUpgradeable) returns (uint256) {
+        bytes32 descHash = keccak256(bytes(description));
+        _proposalDescriptions[descHash] = description;
         return super._propose(targets, values, calldatas, description, proposer);
     }
 
@@ -145,5 +150,9 @@ contract AgentBravoGovernor is
         returns (address)
     {
         return super._executor();
+    }
+
+    function getProposalDescription(bytes32 descriptionHash) public view returns (string memory) {
+        return _proposalDescriptions[descriptionHash];
     }
 }

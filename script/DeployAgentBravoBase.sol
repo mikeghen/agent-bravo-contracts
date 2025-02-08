@@ -40,7 +40,6 @@ abstract contract DeployAgentBravoBase is Script {
 
     // Delegate configuration struct
     struct DelegateConfig {
-        address delegateGovernor;
         address delegateOwner;
         string backstory;
         string voteNoConditions;
@@ -53,8 +52,7 @@ abstract contract DeployAgentBravoBase is Script {
      */
     function setUp() public virtual {
         deployerPrivateKey = vm.envOr(
-            "DEPLOYER_PRIVATE_KEY",
-            uint256(0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80)
+            "DEPLOYER_PRIVATE_KEY", uint256(0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80)
         );
     }
 
@@ -81,11 +79,15 @@ abstract contract DeployAgentBravoBase is Script {
      * @return delegateFactory The deployed AgentBravoDelegateFactory contract.
      * @return delegateClone The deployed and initialized AgentBravoDelegate clone.
      */
-    function run() public virtual returns (
-        AgentBravoGovernor governor,
-        AgentBravoDelegateFactory delegateFactory,
-        AgentBravoDelegate delegateClone
-    ) {
+    function run()
+        public
+        virtual
+        returns (
+            AgentBravoGovernor governor,
+            AgentBravoDelegateFactory delegateFactory,
+            AgentBravoDelegate delegateClone
+        )
+    {
         setUp();
         vm.startBroadcast(deployerPrivateKey);
         console.log("Deploying Agent Bravo contracts...");
@@ -94,7 +96,8 @@ abstract contract DeployAgentBravoBase is Script {
         AgentBravoToken token;
         AgentBravoTimelock timelock;
 
-        { // Deploy AgentBravo token with UUPS proxy
+        {
+            // Deploy AgentBravo token with UUPS proxy
             TokenConfig memory tokenConfig = getTokenConfig();
             address tokenProxy = Upgrades.deployUUPSProxy(
                 "AgentBravoToken.sol",
@@ -108,13 +111,15 @@ abstract contract DeployAgentBravoBase is Script {
             console.log("AgentBravo Token deployed:", address(token));
         }
 
-        { // Deploy AgentBravoTimelock
+        {
+            // Deploy AgentBravoTimelock
             TimelockConfig memory timelockConfig = getTimelockConfig();
             timelock = new AgentBravoTimelock(timelockConfig.admin, timelockConfig.delay);
             console.log("AgentBravoTimelock deployed to:", address(timelock));
         }
 
-        { // Deploy AgentBravoGovernor using UUPS proxy
+        {
+            // Deploy AgentBravoGovernor using UUPS proxy
             GovernorConfig memory governorConfig = getGovernorConfig();
             address governorProxy = Upgrades.deployUUPSProxy(
                 "AgentBravoGovernor.sol",
@@ -128,7 +133,8 @@ abstract contract DeployAgentBravoBase is Script {
             console.log("AgentBravoGovernor deployed:", address(governor));
         }
 
-        { // Deploy AgentBravoDelegate implementation & factory
+        {
+            // Deploy AgentBravoDelegate implementation & factory
             AgentBravoDelegate delegateImpl = new AgentBravoDelegate();
             console.log("AgentBravoDelegate implementation deployed at:", address(delegateImpl));
 
@@ -137,9 +143,10 @@ abstract contract DeployAgentBravoBase is Script {
         }
 
         address cloneAddr;
-        { // Deploy AgentBravoDelegate clone and update voting policy
+        {
+            // Deploy AgentBravoDelegate clone and update voting policy
             DelegateConfig memory delegateConfig = getDelegateConfig();
-            cloneAddr = delegateFactory.deployAgentBravoDelegate(delegateConfig.delegateGovernor, delegateConfig.delegateOwner);
+            cloneAddr = delegateFactory.deployAgentBravoDelegate(address(governor), delegateConfig.delegateOwner);
             console.log("AgentBravoDelegate clone deployed at:", cloneAddr);
 
             AgentBravoDelegate(cloneAddr).updateVotingPolicy(
@@ -150,8 +157,10 @@ abstract contract DeployAgentBravoBase is Script {
             );
         }
 
-        { // Confirm and log the voting policy update
-            (string memory backstory, string memory voteNo, string memory voteYes, string memory voteAbstain) = AgentBravoDelegate(cloneAddr).votingPolicy();
+        {
+            // Confirm and log the voting policy update
+            (string memory backstory, string memory voteNo, string memory voteYes, string memory voteAbstain) =
+                AgentBravoDelegate(cloneAddr).votingPolicy();
             console.log("Voting Policy:");
             console.log("Backstory:", backstory);
             console.log("Vote NO conditions:", voteNo);
@@ -164,4 +173,4 @@ abstract contract DeployAgentBravoBase is Script {
         delegateClone = AgentBravoDelegate(payable(cloneAddr));
         return (governor, delegateFactory, delegateClone);
     }
-} 
+}
