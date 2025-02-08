@@ -189,4 +189,38 @@ contract AgentBravoDelegateTest is Test {
         vm.expectRevert("Ownable: caller is not the owner");
         delegate.updateVotingPolicy(backstory, voteNoConditions, voteYesConditions, voteAbstainConditions);
     }
+
+    /// @notice Verifies that opinions are properly tracked in the enumeration array.
+    function testOpinionEnumeration() public {
+        uint8 support = 1;
+        string memory opinionText = "Enumeration test opinion";
+        string memory reasoningText = "Testing enumeration";
+
+        // Use distinct proposal IDs for enumeration.
+        uint256 proposalId1 = 100;
+        uint256 proposalId2 = 101;
+        uint256 proposalId3 = 102;
+
+        // Publish opinions for three different proposals.
+        delegate.publishOpinionAndVote(proposalId1, support, opinionText, reasoningText);
+        delegate.publishOpinionAndVote(proposalId2, support, opinionText, reasoningText);
+        delegate.publishOpinionAndVote(proposalId3, support, opinionText, reasoningText);
+
+        // Validate that the opinionList array stores the proposals in order.
+        assertEq(delegate.opinionList(0), proposalId1);
+        assertEq(delegate.opinionList(1), proposalId2);
+        assertEq(delegate.opinionList(2), proposalId3);
+
+        // Enumerate over the opinions and verify their stored values.
+        uint256[3] memory expectedProposalIds = [proposalId1, proposalId2, proposalId3];
+        for (uint256 i = 0; i < expectedProposalIds.length; i++) {
+            uint256 pid = delegate.opinionList(i);
+            AgentBravoDelegate.Opinion memory op = delegate.getOpinion(pid);
+            assertEq(op.proposalId, expectedProposalIds[i]);
+            assertEq(op.support, support);
+            assertEq(op.opinion, opinionText);
+            assertEq(op.reasoning, reasoningText);
+            assertGt(op.timestamp, 0);
+        }
+    }
 }

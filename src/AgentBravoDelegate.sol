@@ -66,12 +66,14 @@ contract AgentBravoDelegate {
     /// @notice Mapping from a proposal id to its associated opinion.
     mapping(uint256 => Opinion) public opinions;
 
+    /// @notice Array to store the keys (proposalIds) of published opinions for enumeration.
+    uint256[] public opinionList;
+
     /// @notice Emitted when the owner of the contract is transferred.
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     /// @notice Emitted when an opinion is published and a vote is cast.
-    event OpinionPublished( // The index of the stored opinion (i.e. proposalId)
-    uint256 indexed opinionIndex, address indexed publishedBy, uint256 voteWeight);
+    event OpinionPublished(uint256 indexed opinionIndex, address indexed publishedBy, uint256 voteWeight);
 
     /// @notice Emitted when the agent's voting policy information is updated.
     event VotingPolicyUpdated(
@@ -183,6 +185,9 @@ contract AgentBravoDelegate {
             reasoning: reasoning,
             timestamp: block.timestamp
         });
+
+        // Track the proposal ID for enumeration
+        opinionList.push(proposalId);
 
         // Emit only the opinion index (proposalId) instead of full opinion details.
         emit OpinionPublished(proposalId, msg.sender, voteWeight);
