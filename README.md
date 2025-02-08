@@ -44,16 +44,16 @@ This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timel
 #### Agent Bravo Delegate Factory
 | Contract | Address |
 | --- | --- |
-| `AgentBravoDelegateFactory` | [0xFFfc8c88B0D0172FdaBb72178E2F8B7DfaA51E68](https://arbitrum-sepolia.etherscan.io/address/0xFFfc8c88B0D0172FdaBb72178E2F8B7DfaA51E68) |
-| `AgentBravoDelegate (Implementation)` | [0xBB468CDb61D17e050E816BdeB38d86f5e41be436](https://arbitrum-sepolia.etherscan.io/address/0xBB468CDb61D17e050E816BdeB38d86f5e41be436) |
-| `AgentBravoDelegate (First Clone)` | [0xE83744A950e1F8BE583727C90b590B659144a2Ac](https://arbitrum-sepolia.etherscan.io/address/0xE83744A950e1F8BE583727C90b590B659144a2Ac) |
+| `AgentBravoDelegateFactory` | [0xFFfc8c88B0D0172FdaBb72178E2F8B7DfaA51E68](https://sepolia.arbiscan.io/address/0xFFfc8c88B0D0172FdaBb72178E2F8B7DfaA51E68) |
+| `AgentBravoDelegate (Implementation)` | [0xBB468CDb61D17e050E816BdeB38d86f5e41be436](https://sepolia.arbiscan.io/address/0xBB468CDb61D17e050E816BdeB38d86f5e41be436) |
+| `AgentBravoDelegate (First Clone)` | [0xE83744A950e1F8BE583727C90b590B659144a2Ac](https://sepolia.arbiscan.io/address/0xE83744A950e1F8BE583727C90b590B659144a2Ac) |
 
 #### Agent Bravo Governance System
 | Contract | Address |
 | --- | --- |
-| `AgentBravoToken` | [0xCC47c3FF24f44fdE08FdAaAD6cABcf0339295cD2](https://arbitrum-sepolia.etherscan.io/address/0xCC47c3FF24f44fdE08FdAaAD6cABcf0339295cD2) |
-| `AgentBravoTimelock` | [0x5e737D373D9Fd592F2d1aeC228bBD08bE198732e](https://arbitrum-sepolia.etherscan.io/address/0x5e737D373D9Fd592F2d1aeC228bBD08bE198732e) |
-| `AgentBravoGovernor` | [0x9c5D85d2A24C2059C46950548c937f0a392849Ce](https://arbitrum-sepolia.etherscan.io/address/0x9c5D85d2A24C2059C46950548c937f0a392849Ce) |
+| `AgentBravoToken` | [0xCC47c3FF24f44fdE08FdAaAD6cABcf0339295cD2](https://sepolia.arbiscan.io/address/0xCC47c3FF24f44fdE08FdAaAD6cABcf0339295cD2) |
+| `AgentBravoTimelock` | [0x5e737D373D9Fd592F2d1aeC228bBD08bE198732e](https://sepolia.arbiscan.io/address/0x5e737D373D9Fd592F2d1aeC228bBD08bE198732e) |
+| `AgentBravoGovernor` | [0x9c5D85d2A24C2059C46950548c937f0a392849Ce](https://sepolia.arbiscan.io/address/0x9c5D85d2A24C2059C46950548c937f0a392849Ce) |
 
 
 ### Ethereum Sepolia
