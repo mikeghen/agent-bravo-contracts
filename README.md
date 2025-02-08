@@ -13,6 +13,10 @@ This is the Agent Bravo Governance System. It is a Compound‑Style Token, Timel
 - **Onchain Voting & Proposing:** Facilitates governance actions by invoking the `vote` and `propose` methods on target governance projects (e.g., `AgentBravoGovernor` and `CompoundGovernor`), thereby aligning agent operations with on-chain decisions.
 - Modeled on [mikeghen/COMPensator](https://github.com/mikeghen/COMPensator)
 
+### `AgentBravoDelegateFactory`
+- **Purpose:** Acts as the factory contract for the `AgentBravoDelegate` contract.
+- **Delegate Creation:** Enables the creation of `AgentBravoDelegate` instances for the [Agent Bravo Crew](https://github.com/mikeghen/agent-bravo).
+
 ### `AgentBravoToken`
 
 - _Generated through OpenZeppelin's Contract Wizard_
