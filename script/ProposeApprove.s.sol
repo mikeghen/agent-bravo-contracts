@@ -19,8 +19,8 @@ contract ProposeApprove is Script {
         setUp();
 
         // Set the target addresses.
-        address tokenAddress = 0x0Bb81307daEBB2Ca0A19a44c65717A3728324745;
-        address governorAddress = 0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd;
+        address tokenAddress = 0xCC47c3FF24f44fdE08FdAaAD6cABcf0339295cD2;
+        address governorAddress = 0x9c5D85d2A24C2059C46950548c937f0a392849Ce;
         // The wallet we want to approve to spend our tokens.
         address walletToApprove = 0x6A3bD184C067F3e83c0149f4154c0F5bf95dD780;
 
@@ -31,7 +31,7 @@ contract ProposeApprove is Script {
         targets[0] = tokenAddress;
 
         uint256[] memory values = new uint256[](1);
-        values[0] = 0; // No ETH to be sent with approve.
+        values[0] = 100; // No ETH to be sent with approve.
 
         // Encode the call data for approve(address,uint256)
         bytes[] memory calldatas = new bytes[](1);
@@ -39,7 +39,7 @@ contract ProposeApprove is Script {
 
         // Description for the proposal.
         string memory description =
-            "Proposal: Approve 0x6A3bD184C067F3e83c0149f4154c0F5bf95dD780 to spend 100 token units";
+            "I propose we allow 0x6A3bD184C067F3e83c0149f4154c0F5bf95dD780 to spend 1000 BRAVO tokens for whatever they want.";
 
         // Get the governor contract instance.
         AgentBravoGovernor governor = AgentBravoGovernor(payable(governorAddress));
