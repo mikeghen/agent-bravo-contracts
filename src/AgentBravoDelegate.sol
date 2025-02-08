@@ -27,7 +27,7 @@ interface IGovernor {
 
 /**
  * @title AgentBravoDelegate
- * @notice This contract acts as an autonomous agent that can publish its on-chain 
+ * @notice This contract acts as an autonomous agent that can publish its on-chain
  * opinions and vote on governance proposals via the AgentBravoGovernor.
  *
  * The owner's address controls which account can execute vote actions.
@@ -51,7 +51,7 @@ contract AgentBravoDelegate {
         string reasoning; // Explanation or accompanying reasoning for the vote
         uint256 timestamp; // When the opinion was published
     }
-    
+
     /// @notice Holds information regarding the Agent's voting policy.
     struct VotingPolicy {
         string backstory;
@@ -59,7 +59,7 @@ contract AgentBravoDelegate {
         string voteYesConditions;
         string voteAbstainConditions;
     }
-    
+
     /// @notice Stores the Agent's voting policy information.
     VotingPolicy public votingPolicy;
 
@@ -70,18 +70,12 @@ contract AgentBravoDelegate {
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     /// @notice Emitted when an opinion is published and a vote is cast.
-    event OpinionPublished(
-        uint256 indexed opinionIndex,  // The index of the stored opinion (i.e. proposalId)
-        address indexed publishedBy,
-        uint256 voteWeight
-    );
-    
+    event OpinionPublished( // The index of the stored opinion (i.e. proposalId)
+    uint256 indexed opinionIndex, address indexed publishedBy, uint256 voteWeight);
+
     /// @notice Emitted when the agent's voting policy information is updated.
     event VotingPolicyUpdated(
-        string backstory,
-        string voteNoConditions,
-        string voteYesConditions,
-        string voteAbstainConditions
+        string backstory, string voteNoConditions, string voteYesConditions, string voteAbstainConditions
     );
 
     /// @notice Modifier to restrict access to only the contract owner.
@@ -126,7 +120,7 @@ contract AgentBravoDelegate {
 
         emit OwnershipTransferred(oldOwner, newOwner);
     }
-    
+
     /**
      * @notice Updates the agent voting policy information.
      * @param _backstory The backstory of the agent.
@@ -205,10 +199,7 @@ contract AgentBravoDelegate {
      * - Only the contract owner can call this function.
      * - The `support` parameter must be 0, 1, or 2.
      */
-    function vote(
-        uint256 proposalId,
-        uint8 support
-    ) external onlyOwner returns (uint256 voteWeight) {
+    function vote(uint256 proposalId, uint8 support) external onlyOwner returns (uint256 voteWeight) {
         require(support <= 2, "Invalid vote type");
         voteWeight = governor.castVote(proposalId, support);
     }

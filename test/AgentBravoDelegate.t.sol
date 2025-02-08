@@ -4,14 +4,13 @@ pragma solidity ^0.8.22;
 import "forge-std/Test.sol";
 import {AgentBravoDelegate, IGovernor} from "src/AgentBravoDelegate.sol";
 
-
 /// @dev DummyGovernor implements AgentBravoDelegate.IGovernor so that we can simulate governance interactions.
 contract DummyGovernor is IGovernor {
     uint256 public proposalCounter;
 
     /// @notice For testing purposes, castVote returns a weight based on the vote support.
     /// Support 0 returns 100, support 1 returns 200, support 2 returns 300.
-    function castVote(uint256 /*proposalId*/, uint8 support) external pure override returns (uint256) {
+    function castVote(uint256, /*proposalId*/ uint8 support) external pure override returns (uint256) {
         if (support == 0) {
             return 100;
         } else if (support == 1) {
@@ -21,12 +20,12 @@ contract DummyGovernor is IGovernor {
         }
         revert("Invalid support");
     }
-    
+
     /// @notice For testing propose, we increment a counter and return it as the proposalId.
     function propose(
-        address[] memory /*targets*/,
-        uint256[] memory /*values*/,
-        bytes[] memory /*calldatas*/,
+        address[] memory, /*targets*/
+        uint256[] memory, /*values*/
+        bytes[] memory, /*calldatas*/
         string memory /*description*/
     ) external override returns (uint256) {
         proposalCounter++;
@@ -61,12 +60,7 @@ contract AgentBravoDelegateTest is Test {
         string memory opinionText = "This is my opinion";
         string memory reasoningText = "Because it benefits the community";
 
-        uint256 voteWeight = delegate.publishOpinionAndVote(
-            proposalId,
-            support,
-            opinionText,
-            reasoningText
-        );
+        uint256 voteWeight = delegate.publishOpinionAndVote(proposalId, support, opinionText, reasoningText);
         // DummyGovernor returns 200 for support == 1.
         assertEq(voteWeight, 200);
 
@@ -158,18 +152,23 @@ contract AgentBravoDelegateTest is Test {
     /// @notice Verifies that the owner can update and then read the VotingPolicy parameters.
     function testUpdateVotingPolicyAndRead() public {
         string memory backstory = "You're a seasoned delegate with experience reviewing governance proposals...";
-        string memory voteNoConditions = "The proposal does not clearly demonstrate a return on investment (ROI) of at least 10% annually.";
-        string memory voteYesConditions = "The proposal clearly demonstrates a return on investment (ROI) of 10% or more annually.";
-        string memory voteAbstainConditions = "The proposal's return on investment (ROI) cannot be accurately determined from the provided information.";
+        string memory voteNoConditions =
+            "The proposal does not clearly demonstrate a return on investment (ROI) of at least 10% annually.";
+        string memory voteYesConditions =
+            "The proposal clearly demonstrates a return on investment (ROI) of 10% or more annually.";
+        string memory voteAbstainConditions =
+            "The proposal's return on investment (ROI) cannot be accurately determined from the provided information.";
 
         // Update the voting policy as the owner.
         delegate.updateVotingPolicy(backstory, voteNoConditions, voteYesConditions, voteAbstainConditions);
 
         // Retrieve the stored VotingPolicy data.
-        (string memory storedBackstory,
-         string memory storedVoteNoConditions,
-         string memory storedVoteYesConditions,
-         string memory storedVoteAbstainConditions) = delegate.votingPolicy();
+        (
+            string memory storedBackstory,
+            string memory storedVoteNoConditions,
+            string memory storedVoteYesConditions,
+            string memory storedVoteAbstainConditions
+        ) = delegate.votingPolicy();
 
         // Verify the stored values match our inputs.
         assertEq(storedBackstory, backstory);
@@ -190,4 +189,4 @@ contract AgentBravoDelegateTest is Test {
         vm.expectRevert("Ownable: caller is not the owner");
         delegate.updateVotingPolicy(backstory, voteNoConditions, voteYesConditions, voteAbstainConditions);
     }
-} 
+}

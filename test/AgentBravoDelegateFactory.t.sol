@@ -15,16 +15,15 @@ contract DummyGovernor {
         if (support == 2) return 300;
         revert("Invalid support");
     }
-    function propose(
-        address[] memory,
-        uint256[] memory,
-        bytes[] memory,
-        string memory
-    ) external pure returns (uint256) {
+
+    function propose(address[] memory, uint256[] memory, bytes[] memory, string memory)
+        external
+        pure
+        returns (uint256)
+    {
         return 1;
     }
 }
-
 
 contract AgentBravoDelegateFactoryTest is Test {
     AgentBravoDelegateFactory public factory;
@@ -96,4 +95,4 @@ contract AgentBravoDelegateFactoryTest is Test {
         vm.expectRevert(abi.encodeWithSelector(OwnableUnauthorizedAccount.selector, nonOwner));
         factory.updateImplementation(newImpl);
     }
-} 
+}

@@ -10,8 +10,7 @@ contract ProposeApprove is Script {
     /// @notice Loads the deployer's private key from the environment.
     function setUp() public virtual {
         deployerPrivateKey = vm.envOr(
-            "DEPLOYER_PRIVATE_KEY", 
-            uint256(0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80)
+            "DEPLOYER_PRIVATE_KEY", uint256(0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80)
         );
     }
 
@@ -39,7 +38,8 @@ contract ProposeApprove is Script {
         calldatas[0] = abi.encodeWithSignature("approve(address,uint256)", walletToApprove, 100);
 
         // Description for the proposal.
-        string memory description = "Proposal: Approve 0x6A3bD184C067F3e83c0149f4154c0F5bf95dD780 to spend 100 token units";
+        string memory description =
+            "Proposal: Approve 0x6A3bD184C067F3e83c0149f4154c0F5bf95dD780 to spend 100 token units";
 
         // Get the governor contract instance.
         AgentBravoGovernor governor = AgentBravoGovernor(payable(governorAddress));
@@ -51,4 +51,4 @@ contract ProposeApprove is Script {
 
         console.log("Created proposal with ID:", proposalId);
     }
-} 
+}

@@ -16,7 +16,7 @@ contract SepoliaAgentBravoDelegateDeploy is DeployAgentBravoDelegateBaseImpl {
     // --- Delegate Initialization Constants ---
     // In this example the same address is used for the delegate governor and owner.
     // Check README.md for the address of the latest Governor.
-    address constant SEPOLIA_DELEGATE_GOVERNOR = 0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd; 
+    address constant SEPOLIA_DELEGATE_GOVERNOR = 0x0705294b11715FC2C1D231D3616D76fc07F3c8Cd;
 
     /**
      * @notice Executes the deployment of AgentBravoDelegate contracts on Sepolia.
@@ -58,7 +58,7 @@ contract SepoliaAgentBravoDelegateDeploy is DeployAgentBravoDelegateBaseImpl {
         console.log("Voting policy vote ABSTAIN conditions:", voteAbstainConditions);
 
         vm.stopBroadcast();
-        
+
         return factory;
     }
-} 
+}
