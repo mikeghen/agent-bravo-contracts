@@ -41,8 +41,8 @@ contract ProposeApprove is Script {
         // Description for the proposal.
         string memory description =
             "I propose that we spend 1000 BRAVO on a developer hackathon and give away the 1000 BRAVO to the top 10% of developers that use the Agent Bravo Framework to create the best applications.";
-            // "I propose we spend 1000 Bravo hosting a happy hour for venture capitalists and other crypto enthusiasts.";
-            // "I propose that 1000 BRAVO be sent to the developer that creates any application that is great and will lead to a BIG WIN for the Agent Bravo community. We'll see this 1000 BRAVO come back 5x in no time at all!";
+        // "I propose we spend 1000 Bravo hosting a happy hour for venture capitalists and other crypto enthusiasts.";
+        // "I propose that 1000 BRAVO be sent to the developer that creates any application that is great and will lead to a BIG WIN for the Agent Bravo community. We'll see this 1000 BRAVO come back 5x in no time at all!";
 
         // Get the governor contract instance.
         AgentBravoGovernor governor = AgentBravoGovernor(payable(governorAddress));
