@@ -8,11 +8,11 @@ contract PublishOpinionAndVote is Script {
     uint256 private deployerPrivateKey;
 
     // Constants for the deployed AgentBravoDelegate contract address and proposal parameters.
-    address constant AGENT_BRAVO_DELEGATE_ADDRESS = 0xE83744A950e1F8BE583727C90b590B659144a2Ac;
-    uint256 constant PROPOSAL_ID = 27957365971914158258234935394155223005460292230222525945549756804929824905336; // The proposal id you wish to vote on.
-    uint8 constant SUPPORT = 1; // Vote type (0 = Against, 1 = For, 2 = Abstain).
-    string constant OPINION = "I believe this proposal is beneficial and it has a good return on investment.";
-    string constant REASONING = "After reviewing the details, I believe this proposal is a great opportunity to support because it has a good return on investment.";
+    address constant AGENT_BRAVO_DELEGATE_ADDRESS = 0xcD1a8c4C0BA0A59111DfAA7C94Df7DaA689a313f;
+    uint256 constant PROPOSAL_ID = 38793478598464004948738479679679775430145766878331751076774540905300774881405; // The proposal id you wish to vote on.
+    uint8 constant SUPPORT = 2; // Vote type (0 = Against, 1 = For, 2 = Abstain).
+    string constant OPINION = "I will abstain from voting on this proposal since its not related to marketing or community.";
+    string constant REASONING = "I abstained from voting because this proposal is not related to marketing or community.";
 
     /// @notice Loads the deployer's private key from the environment.
     function setUp() public virtual {

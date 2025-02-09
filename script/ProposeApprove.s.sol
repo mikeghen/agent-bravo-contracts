@@ -25,21 +25,24 @@ contract ProposeApprove is Script {
         address walletToApprove = 0x095a32B4342B38C36E1FD914e1850b5dF1068266;
 
         // Prepare the proposal details.
+        // TODO: Hardcoding this for the purposes of the hackathon.
         // Our proposal will call token.approve(walletToApprove, 100).
         // Since this is a call on the token contract, we create a single-element array.
         address[] memory targets = new address[](1);
         targets[0] = tokenAddress;
 
         uint256[] memory values = new uint256[](1);
-        values[0] = 100; // No ETH to be sent with approve.
+        values[0] = 0; // No ETH to be sent with approve.
 
         // Encode the call data for approve(address,uint256)
         bytes[] memory calldatas = new bytes[](1);
-        calldatas[0] = abi.encodeWithSignature("approve(address,uint256)", walletToApprove, 100);
+        calldatas[0] = abi.encodeWithSignature("approve(address,uint256)", walletToApprove, 3);
 
         // Description for the proposal.
         string memory description =
-            "I propose we allow 0x6A3bD184C067F3e83c0149f4154c0F5bf95dD780 to spend 1000 BRAVO tokens for whatever they want because they have solid plan to return 2000 BRAVO tokens to the treasury over the next year.";
+            "I propose that we spend 1000 BRAVO on a developer hackathon and give away the 1000 BRAVO to the top 10% of developers that use the Agent Bravo Framework to create the best applications.";
+            // "I propose we spend 1000 Bravo hosting a happy hour for venture capitalists and other crypto enthusiasts.";
+            // "I propose that 1000 BRAVO be sent to the developer that creates any application that is great and will lead to a BIG WIN for the Agent Bravo community. We'll see this 1000 BRAVO come back 5x in no time at all!";
 
         // Get the governor contract instance.
         AgentBravoGovernor governor = AgentBravoGovernor(payable(governorAddress));
