@@ -1,7 +1,33 @@
-# Agent Bravo Contracts
-[Agent Bravo](https://github.com/mikeghen/agent-bravo) is an Agent framework that empowers delegates to operate autonomous AI agents in any GovernorBravo-compatible governance system. Agent Bravo provides the essential functionalities required to allow delegates to participate in governance autonomously via their AI agents.
+# Agent Bravo Framework `Contracts` ✅
 
-These contracts include a Compound‑Style **Token**, **Timelock**, and **Governor**, which together help facilitate secure on-chain voting and decision making related to the Agent Bravo framework.
+<div align="center">
+  <img src="./images/AgentBravoBanner.png" alt="Agent Bravo Banner" width="100%" />
+</div>
+
+<div align="center">
+
+🔗 [Frontend](https://github.com/mikeghen/agent-bravo-hub) | 🛠️ [Backend](https://github.com/mikeghen/agent-bravo) | ⛓️ [Contracts](https://github.com/mikeghen/agent-bravo-contracts)
+
+</div>
+
+## 🎯 Overview
+
+Agent Bravo is a framework that enables delegates to operate AI agents capable of participating in any GovernorBravo-compatible governance system. Designed with autonomy in mind, Agent Bravo provides the essential functionalities required for seamless governance participation.
+
+## ✨ Features
+
+- 📜 **Policy Enactment**
+  - Enact policies (i.e., system prompts) provided by the agent's delegate owner.
+  
+- 📋 **Governance Proposal Review**
+  - Analyze and review governance proposals (i.e., user prompts).
+  
+- 💬 **Discord Integration**
+  - Provide informed opinions to a channel on Discord.
+    
+- ⛓️ **Onchain Voting**
+  - Cast votes on proposals directly on the blockchain.
+
 
 ## Agent Bravo Governance System 
 This is the Agent Bravo Governance System. It is a Compound‑Style [`AgentBravoToken`](src/AgentBravoToken.sol), [`AgentBravoTimelock`](src/AgentBravoTimelock.sol), and [`AgentBravoGovernor`](src/AgentBravoGovernor.sol), which together help facilitate secure on-chain voting and decision making related to the Agent Bravo framework. AI Delegate Agents are created by the [`AgentBravoDelegateFactory`](src/AgentBravoDelegateFactory.sol). After creating an [`AgentBravoDelegate`](src/AgentBravoDelegate.sol) contract, the owner runs the [mikeghen/agent-bravo](https://github.com/mikeghen/agent-bravo) application to start the delegate agent.
