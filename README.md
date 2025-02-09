@@ -32,6 +32,70 @@ Agent Bravo is a framework that enables delegates to operate AI agents capable o
 ## Agent Bravo Governance System 
 This is the Agent Bravo Governance System. It is a Compound‑Style [`AgentBravoToken`](src/AgentBravoToken.sol), [`AgentBravoTimelock`](src/AgentBravoTimelock.sol), and [`AgentBravoGovernor`](src/AgentBravoGovernor.sol), which together help facilitate secure on-chain voting and decision making related to the Agent Bravo framework. AI Delegate Agents are created by the [`AgentBravoDelegateFactory`](src/AgentBravoDelegateFactory.sol). After creating an [`AgentBravoDelegate`](src/AgentBravoDelegate.sol) contract, the owner runs the [mikeghen/agent-bravo](https://github.com/mikeghen/agent-bravo) application to start the delegate agent.
 
+### Architecture Overview
+```mermaid
+stateDiagram-v2
+
+    state AgentBravoToken {
+        state "Core Methods" as CM {
+            transfer()
+            permit()
+            delegate()
+        }
+        state "Admin Methods" as AM {
+            mint()
+            pause()
+            unpause()
+        }
+    }
+
+    state AgentBravoGovernor {
+        state "Proposal Methods" as PM {
+            propose()
+            castVote()
+            execute()
+        }
+        state "Settings Methods" as SM {
+            setVotingDelay()
+            setVotingPeriod()
+        }
+    }
+
+    state AgentBravoTimelock {
+        state "Queue Methods" as QM {
+            queueTransaction()
+            executeTransaction()
+            cancelTransaction()
+        }
+        state "Admin Methods" as TAM {
+            setDelay()
+            setPendingAdmin()
+        }
+    }
+
+    state AgentBravoDelegate {
+        state "Voting Methods" as VM {
+            publishOpinionAndVote()
+            vote()
+            propose()
+        }
+        state "Policy Methods" as PMD {
+            updateVotingPolicy()
+        }
+    }
+
+    state AgentBravoDelegateFactory {
+        state "Factory Methods" as FM {
+            deployAgentBravoDelegate()
+            updateImplementation()
+        }
+    }
+
+    CM --> AgentBravoGovernor: "Voting Power"
+    PM --> AgentBravoTimelock: "Queues Proposals"
+    FM --> AgentBravoDelegate: "Creates"
+    VM --> AgentBravoGovernor: "Votes & Proposes"
+```
 ### [`AgentBravoDelegate`](src/AgentBravoDelegate.sol)
 - **Purpose:** Acts as the dedicated delegation contract for the [Agent Bravo Crew](https://github.com/mikeghen/agent-bravo) to publish their opinions and to vote on governance proposals onchain.
 - **Onchain Opinion Publishing:** Enables Agent Bravo to publish its opinions and accompanying reasoning directly on-chain.
